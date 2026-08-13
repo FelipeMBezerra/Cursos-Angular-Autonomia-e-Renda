@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed, effect } from '@angular/core';
 import { Produto } from '../produto/produto';
+
 
 @Component({
   selector: 'app-lista-produtos',
@@ -8,12 +9,42 @@ import { Produto } from '../produto/produto';
   styleUrl: './lista-produtos.css',
 })
 export class ListaProdutos {
+
+  constructor() {
+    effect(() => {
+      console.log('Lista de produtos alterada', this.produtos());
+    });
+    effect(() => {
+      console.log('Valor total atualizado:', this.valorTotal());
+    });
+    effect(() => {
+      if (typeof document !== 'undefined') {
+        document.title = `(${this.totalProdutos()} da Minha loja)`;
+      }
+    });
+  }
   produtos = signal<
     {
       nome: string;
       preco: number;
     }[]
   >([]);
+
+  produtoSelecionado = signal<string | null>(null);
+
+  totalProdutos = computed(() => this.produtos().length);
+
+  valorTotal = computed(() => {
+    return this.produtos().reduce(
+      (total, item) => total + item.preco, 0);
+  })
+
+  substituirProdutos() {
+    this.produtos.set([
+      { nome: 'Produto novo', preco: 999 }
+    ]);
+  }
+
   produtosNovos = [
     { nome: 'notebook', preco: 3500 },
     { nome: 'mouse', preco: 150 },
@@ -56,6 +87,7 @@ export class ListaProdutos {
   }
 
   exibirProduto(nome: string) {
+    this.produtoSelecionado.set(nome);
     console.log('Produto selecionado é ' + nome);
   }
 }
