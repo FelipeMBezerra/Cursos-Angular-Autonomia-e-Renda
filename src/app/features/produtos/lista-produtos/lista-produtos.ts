@@ -1,10 +1,11 @@
 import { Component, signal, computed, effect } from '@angular/core';
 import { Produto } from '../produto/produto';
+import { CurrencyPipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto],
+  imports: [Produto, CurrencyPipe],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
