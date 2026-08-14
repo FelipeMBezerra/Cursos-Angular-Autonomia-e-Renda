@@ -1,17 +1,37 @@
 <h2>Total de produtos: {{ totalProdutos()}}</h2>
-<h3>Valor total dos produtos: R${{ valorTotal() }}</h3>
+<h3>Valor total: R${{ valorTotal() }}</h3>
 <h3>Produto Selecionado:
   @if (produtoSelecionado()){
-    <strong style="color: green;">{{ produtoSelecionado() }}</strong>
+    <strong [style.color]="corSelecionada()">{{ produtoSelecionado() }}</strong>
   } @else {
     <span style="color: gray;">Nenhum</span>
   }
 </h3>
-
-@for (item of produtos(); track item.nome) {
-<app-produto [nome]="item.nome" [preco]="item.preco" (produtoSelecionado)="exibirProduto($event)">
+  
+@for (item of produtos(); track item.nome;) {
+<app-produto [nome]="item.nome" 
+[preco]="item.preco" 
+(produtoSelecionado)="exibirProduto($event)">
 </app-produto>
+
+<button (click)="adicionarAoCarrinho(item)">
+  Adicionar ao Carrinho
+</button>
+
 }
 
 <button (click)="adicionarProduto()">Adicionar Produto</button>
 <button (click)="substituirProdutos()">Substituir Lista</button>  
+
+<section>
+<hr>
+
+<h2>Carrinho:</h2>
+
+@for (item of carrinho(); track $index){
+  <p>{{item.nome}} - R$ {{item.preco | currency: 'BRL'}}</p>
+}
+
+<p><strong>Itens no carrinho:</strong>{{quantidadeCarrinho()}}</p>
+<p><strong>Total do Carrinho:</strong>R$ {{ totalCarrinho() | currency: 'BRL'}}</p>
+</section>

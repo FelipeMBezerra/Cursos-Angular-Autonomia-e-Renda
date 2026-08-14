@@ -9,6 +9,7 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
+
 export class ListaProdutos {
 
   constructor() {
@@ -24,14 +25,25 @@ export class ListaProdutos {
       }
     });
   }
-  produtos = signal<
-    {
-      nome: string;
-      preco: number;
-    }[]
-  >([]);
+  produtos = signal<{ nome: string; preco: number; }[]>([]);
+
 
   produtoSelecionado = signal<string | null>(null);
+
+  cores = ['red','green','blue', 'orange', 'purple'];
+  i = 0;
+
+  corSelecionada = signal<string>('green')
+
+  exibirProduto(nome:string){
+    this.produtoSelecionado.set(nome);
+
+  this.corSelecionada.set(this.cores[this.i% this.cores.length])
+  this.i++;
+
+  console.log('Produto selecionado é' + nome);
+
+  }
 
   totalProdutos = computed(() => this.produtos().length);
 
@@ -39,6 +51,7 @@ export class ListaProdutos {
     return this.produtos().reduce(
       (total, item) => total + item.preco, 0);
   })
+
 
   substituirProdutos() {
     this.produtos.set([
@@ -85,10 +98,5 @@ export class ListaProdutos {
     } else {
       /* Caso contrario, não faço nada */
     }
-  }
-
-  exibirProduto(nome: string) {
-    this.produtoSelecionado.set(nome);
-    console.log('Produto selecionado é ' + nome);
   }
 }
