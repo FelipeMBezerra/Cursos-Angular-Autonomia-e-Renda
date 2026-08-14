@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h2>Total de produtos: {{ totalProdutos()}}</h2>
 <h3>Valor total: R${{ valorTotal() }}</h3>
 <h3>Produto Selecionado:
@@ -17,10 +18,23 @@
 <button (click)="adicionarAoCarrinho(item)">
   Adicionar ao Carrinho
 </button>
+=======
+<h2>Total de Produtos: {{ totalProdutos() }}</h2>
+<h2>Total em valor de produtos: {{ valorTotal() | currency }}</h2>
+<h2>
+  Produto Selecionado:
+  @if (produtoSelecionado()) {
+    <strong style="color: green">{{ produtoSelecionado() }}</strong>
+  } @else {
+    <strong style="color: gray">Nenhum</strong>
+  }
+</h2>
+>>>>>>> 60da7bd7cc795e82ff3df1b9fd44b0739fabf25f
 
 }
 
 <button (click)="adicionarProduto()">Adicionar Produto</button>
+<<<<<<< HEAD
 <button (click)="substituirProdutos()">Substituir Lista</button>  
 
 <section>
@@ -35,3 +49,6 @@
 <p><strong>Itens no carrinho:</strong>{{quantidadeCarrinho()}}</p>
 <p><strong>Total do Carrinho:</strong>R$ {{ totalCarrinho() | currency: 'BRL'}}</p>
 </section>
+=======
+<button (click)="substituirProduto()">Substituir Produto</button>
+>>>>>>> 60da7bd7cc795e82ff3df1b9fd44b0739fabf25f
