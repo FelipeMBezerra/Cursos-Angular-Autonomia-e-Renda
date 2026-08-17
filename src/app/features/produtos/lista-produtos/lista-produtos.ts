@@ -11,7 +11,6 @@ import { CurrencyPipe } from '@angular/common';
 })
 
 export class ListaProdutos {
-<<<<<<< HEAD
 
   constructor() {
     effect(() => {
@@ -25,6 +24,21 @@ export class ListaProdutos {
         document.title = `(${this.totalProdutos()} da Minha loja)`;
       }
     });
+  }
+
+
+  carrinho = signal<{ nome: string; preco: number }[]>([])
+
+  quantidadeCarrinho = computed(() => this.carrinho().length);
+  totalCarrinho = computed(() =>
+    this.carrinho().reduce((total, item) => total + item.preco, 0)
+  );
+
+  adicionarAoCarrinho(produto: { nome: string; preco: number }) {
+    this.carrinho.update(listaAtual => [
+      ...listaAtual,
+      produto
+    ]);
   }
   produtos = signal<{ nome: string; preco: number; }[]>([]);
 
@@ -45,26 +59,6 @@ export class ListaProdutos {
   console.log('Produto selecionado é' + nome);
 
   }
-=======
-  constructor() {
-    effect(() => {
-      console.log('A lista de produtos foi alterada: ', this.produtos());
-    });
-    effect(() => {
-      console.log('O valor atualizado: ', this.valorTotal());
-    });
-    effect(() => {
-      document.title = `(${this.totalProdutos()}) da Minha Loja`;
-    });
-  }
-  produtos = signal<
-    {
-      nome: string;
-      preco: number;
-    }[]
-  >([]);
-  produtoSelecionado = signal<string | null>(null);
->>>>>>> 60da7bd7cc795e82ff3df1b9fd44b0739fabf25f
 
   totalProdutos = computed(() => this.produtos().length);
 
@@ -120,13 +114,7 @@ export class ListaProdutos {
       /* Caso contrario, não faço nada */
     }
   }
-<<<<<<< HEAD
-=======
 
-  exibirProduto(nome: string) {
-    this.produtoSelecionado.set(nome);
-    console.log('Produto selecionado é ' + nome);
-  }
 
   substituirProduto() {
     // Desafio, atualizar somente o valor do item "notebook" sem alterar os valores de outros items
@@ -149,5 +137,6 @@ export class ListaProdutos {
     /* Altera a lista antiga de produtos, com a nova lista */
     this.produtos.set(novaLista);
   }
->>>>>>> 60da7bd7cc795e82ff3df1b9fd44b0739fabf25f
+
+  
 }
