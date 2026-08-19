@@ -9,3 +9,19 @@ a{
     text-align: center;
     text-decoration: none;
 }
+
+button {   
+    align-items: center;
+    margin: 5px;
+    gap: 36px;
+}
+
+.Logar:hover{
+    background-color: green;
+    color: white;
+}
+
+.Logout:hover{
+    background-color: red;
+    color: white;
+}

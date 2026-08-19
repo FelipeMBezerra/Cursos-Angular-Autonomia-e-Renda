@@ -1,6 +1,7 @@
 import { Component, signal, computed, effect } from '@angular/core';
 import { Produto } from '../produto/produto';
 import { CurrencyPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -12,7 +13,10 @@ import { CurrencyPipe } from '@angular/common';
 
 export class ListaProdutos {
 
-  constructor() {
+  constructor(private http: HttpClient) {
+
+    this.carregarProdutos();
+
     effect(() => {
       console.log('Lista de produtos alterada', this.produtos());
     });
@@ -40,23 +44,26 @@ export class ListaProdutos {
       produto
     ]);
   }
+
+  carregando = signal(true);
+
   produtos = signal<{ nome: string; preco: number; }[]>([]);
 
 
   produtoSelecionado = signal<string | null>(null);
 
-  cores = ['red','green','blue', 'orange', 'purple'];
+  cores = ['red', 'green', 'blue', 'orange', 'purple'];
   i = 0;
 
   corSelecionada = signal<string>('green')
 
-  exibirProduto(nome:string){
+  exibirProduto(nome: string) {
     this.produtoSelecionado.set(nome);
 
-  this.corSelecionada.set(this.cores[this.i% this.cores.length])
-  this.i++;
+    this.corSelecionada.set(this.cores[this.i % this.cores.length])
+    this.i++;
 
-  console.log('Produto selecionado é' + nome);
+    console.log('Produto selecionado é' + nome);
 
   }
 
@@ -79,6 +86,27 @@ export class ListaProdutos {
     { nome: 'mouse', preco: 150 },
     { nome: 'teclado', preco: 250.55 },
   ];
+
+  carregarProdutos() {
+    this.carregando.set(true);
+
+    this.http.get<{ title: string, price: number; image: string }[]>('https://fakestoreapi.com/products').subscribe({
+      next: (dados) => {
+
+        const produtosFormatados = dados.map(p => ({
+          nome: p.title,
+          preco: p.price
+        }))
+        this.produtos.set(produtosFormatados);
+        this.carregando.set(false);
+      },
+
+      error:(erro) => {
+        console.error('Erro ao carregar produtos:', erro);
+        this.carregando.set(false);
+      }
+    })
+  }
 
   filtrarNovoProduto() {
     /* Esta função irá filtar a lista atual de produtos 
@@ -103,7 +131,6 @@ export class ListaProdutos {
     ele retorna um valor nulo para verificação na inclusão da lista */
     return null;
   }
-
   adicionarProduto() {
     let novoproduto: { nome: string; preco: number } | null = this.filtrarNovoProduto();
 
@@ -138,5 +165,4 @@ export class ListaProdutos {
     this.produtos.set(novaLista);
   }
 
-  
 }

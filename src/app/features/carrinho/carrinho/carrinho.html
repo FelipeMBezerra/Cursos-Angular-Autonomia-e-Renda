@@ -1,5 +1,10 @@
-<h1>Carrinho</h1>
+<section>
+<h2>Carrinho:</h2>
 
-<p>Você está  na página do carrinho.</p>
+@for (item of carrinho(); track $index){
+  <p>{{item.nome}} - R$ {{item.preco | currency: 'BRL'}}</p>
+}
 
-<p>Nas próximas aulas, este carrinho será conectado ao estado global.</p>
+<p><strong>Itens no carrinho:</strong>{{quantidadeCarrinho()}}</p>
+<p><strong>Total do Carrinho:</strong>R$ {{ totalCarrinho() | currency: 'BRL'}}</p>
+</section>

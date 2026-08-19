@@ -6,6 +6,11 @@
     <a routerLink="/carrinho">Carrinho</a>
 </nav>
 
+<button class="Logar" (click)="login()">Logar</button>
+<button class="Logout" (click)="logout()">Deslogar</button>
+
+<p>Status: {{ usuarioLogado()? 'Logado' : 'Deslogado'}}</p>
+
 <hr>
 
 <router-outlet></router-outlet>

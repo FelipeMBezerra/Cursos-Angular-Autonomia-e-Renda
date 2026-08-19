@@ -4,7 +4,7 @@ import { Produto } from '../../produtos/produto/produto';
 
 @Component({
   selector: 'app-carrinho',
-  imports: [Carrinho, CurrencyPipe,Produto],
+  imports: [CurrencyPipe,Produto],
   templateUrl: './carrinho.html',
   styleUrl: './carrinho.css',
 })
