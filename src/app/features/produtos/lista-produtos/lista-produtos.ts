@@ -2,11 +2,12 @@ import { Component, signal, computed, effect, inject } from '@angular/core';
 import { Produto } from '../produto/produto';
 import { CurrencyPipe } from '@angular/common';
 import { ProdutosService } from '../produtos.service';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto, CurrencyPipe],
+  imports: [Produto, CurrencyPipe, MatButtonModule],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
@@ -45,6 +46,8 @@ export class ListaProdutos {
       produto
     ]);
   }
+
+  erro = signal<string | null>(null);
 
   carregando = signal(true);
 
@@ -89,6 +92,7 @@ export class ListaProdutos {
   ];
 
   carregarProdutos() {
+    this.erro.set(null);
     this.carregando.set(true);
 
     this.produtosService.buscarProdutos().subscribe({
@@ -99,6 +103,7 @@ export class ListaProdutos {
       },
       error: (erro) => {
         console.error('Erro ao carregar produtos:', erro);
+        this.erro.set('Erro ao carregar produtos. Verifique sua conexão e tente novamente.')
         this.carregando.set(false);
       }
     });

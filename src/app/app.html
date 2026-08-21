@@ -9,7 +9,7 @@
 <button class="Logar" (click)="login()">Logar</button>
 <button class="Logout" (click)="logout()">Deslogar</button>
 
-<p>Status: {{ usuarioLogado()? 'Logado' : 'Deslogado'}}</p>
+<p>Status: <span class="{{usuarioLogado()? 'cor-logado' : 'cor-deslogado'}}">{{ usuarioLogado()? 'Logado' : 'Deslogado'}} </span></p>
 
 <hr>
 

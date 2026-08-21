@@ -16,7 +16,7 @@ export const HttpInterceptor: HttpInterceptorFn = (req, next) => {
             error : (error) => console.error('ERRO', error)
         }),
         catchError((error) => {
-            console.log('ERRO GLOBAL:', error);
+            console.error('ERRO GLOBAL:', error);
             if (error.status === 401) {
                 console.warn('Não autorizado!');
             }

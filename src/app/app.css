@@ -25,3 +25,11 @@ button {
     background-color: red;
     color: white;
 }
+
+.cor-logado{
+    color: green;
+}
+
+.cor-deslogado{
+    color: red;
+}

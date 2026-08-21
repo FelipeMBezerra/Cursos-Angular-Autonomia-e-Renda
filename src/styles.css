@@ -1,3 +1,10 @@
 body{
-    background-color: #ccc;
+    background-color: rgb(241, 210, 210);
 }
+
+a{
+}
+a:hover{
+    color: rgb(226, 12, 52);
+}
+
