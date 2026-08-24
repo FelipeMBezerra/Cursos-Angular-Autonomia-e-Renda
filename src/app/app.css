@@ -1,13 +1,11 @@
-h1{
-    text-align: center;
+.container-principal{
+padding: 16px;
+max-width: 1200px;
+margin: 0 auto;
 }
 
-nav{
-    text-align: center;
-}
-a{ 
-    text-align: center;
-    text-decoration: none;
+.bloco-controle{
+    margin-bottom: 16px;
 }
 
 button {   

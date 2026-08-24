@@ -1,11 +1,10 @@
-
-
-button{
-    align-items: center;
-    margin: 5px;
-    gap: 36px;
+.produto{
+    margin: 20px;
 }
 
-.produto{
-    margin: 10px;
+mat-card{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }

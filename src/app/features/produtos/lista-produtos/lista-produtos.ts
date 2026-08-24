@@ -76,7 +76,7 @@ export class ListaProdutos {
   valorTotal = computed(() => {
     return this.produtos().reduce(
       (total, item) => total + item.preco, 0);
-  })
+  });
 
 
   substituirProdutos() {

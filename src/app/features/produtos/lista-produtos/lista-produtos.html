@@ -14,7 +14,7 @@
 
 <section>
 <!-- <h2>Total de produtos: {{ totalProdutos()}}</h2> -->
-<h3>Valor total: R${{ valorTotal() }}</h3>
+<h3>Valor total: R${{ valorTotal() | currency: 'BRL'}}</h3>
 <h3>Produto Selecionado:
   @if (produtoSelecionado()){
     <strong [style.color]="corSelecionada()">{{ produtoSelecionado() }}</strong>
@@ -22,25 +22,20 @@
     <span style="color: gray;">Nenhum</span>
   }
 </h3>
+</section>
 
-
-
-@for (item of produtos(); track item.nome;) {
+<section class="grid-produtos">
+@for (item of produtos(); track $index;) {
 <app-produto [nome]="item.nome" 
 [preco]="item.preco" 
-(produtoSelecionado)="exibirProduto($event)">
+(produtoSelecionado)="exibirProduto($event)"
+(adicionarProdutoAoCarrinho)="adicionarAoCarrinho($event)">
 </app-produto>
-
-<button  mat-raised-button color="primary" (click)="adicionarProduto()">
-  Adicionar ao Carrinho
-</button>
-
 }
-
-
+</section>
 
 <hr>
-
+<section>
 <h2>Carrinho:</h2>
 
 @for (item of carrinho(); track $index){
