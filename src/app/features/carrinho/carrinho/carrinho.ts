@@ -1,25 +1,19 @@
-import { Component, signal, computed, effect} from '@angular/core';
+import { Component, signal, computed, effect, inject } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { Produto } from '../../produtos/produto/produto';
+
+import { CarrinhoService } from '../../../core/service/carrinho.service';
 
 @Component({
   selector: 'app-carrinho',
-  imports: [CurrencyPipe,Produto],
+  imports: [CurrencyPipe],
   templateUrl: './carrinho.html',
   styleUrl: './carrinho.css',
 })
 export class Carrinho {
-  carrinho = signal<{ nome: string; preco: number }[]>([])
 
-  quantidadeCarrinho = computed(() => this.carrinho().length);
-  totalCarrinho = computed(() =>
-    this.carrinho().reduce((total, item) => total + item.preco, 0)
-  );
+  carrinhoService = inject(CarrinhoService);
 
-  adicionarAoCarrinho(produto: { nome: string; preco: number }) {
-    this.carrinho.update(listaAtual => [
-      ...listaAtual,
-      produto
-    ]);
-  }
+  quantidadeCarrinho = this.carrinhoService.quantidade;
+  totalCarrinho = this.carrinhoService.total;
+
 }

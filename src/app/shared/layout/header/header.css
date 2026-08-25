@@ -1,4 +1,9 @@
+.logo{
+    cursor: pointer;
+}
+
 mat-toolbar{
+    background-color: rgb(231, 177, 177);
     position: sticky;
     top: 0;
     z-index: 1000;

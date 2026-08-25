@@ -33,15 +33,3 @@
 </app-produto>
 }
 </section>
-
-<hr>
-<section>
-<h2>Carrinho:</h2>
-
-@for (item of carrinho(); track $index){
-  <p>{{item.nome}} - R$ {{item.preco | currency: 'BRL'}}</p>
-}
-
-<p><strong>Itens no carrinho:</strong>{{quantidadeCarrinho()}}</p>
-<p><strong>Total do Carrinho:</strong>R$ {{ totalCarrinho() | currency: 'BRL'}}</p>
-</section>

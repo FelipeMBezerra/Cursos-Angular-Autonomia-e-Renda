@@ -1,3 +1,7 @@
+*{
+    font-family: roboto, sans-serif ;
+}
+
 .container-principal{
 padding: 16px;
 max-width: 1200px;
@@ -8,19 +12,24 @@ margin: 0 auto;
     margin-bottom: 16px;
 }
 
-button {   
+button {  
+    background-color: rgb(231, 177, 177);
     align-items: center;
     margin: 5px;
-    gap: 36px;
+    border-radius: 30px;
+    padding: 5px;
+    
 }
 
 .Logar:hover{
-    background-color: green;
+    background-color: rgb(78, 134, 78);
+    border-color: rgb(78, 134, 78);
     color: white;
 }
 
 .Logout:hover{
-    background-color: red;
+    background-color: rgb(192, 45, 45);
+    border-color: rgb(192, 45, 45);;
     color: white;
 }
 

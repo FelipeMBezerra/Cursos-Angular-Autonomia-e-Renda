@@ -1,7 +1,7 @@
 <section>
-<h2>Carrinho:</h2>
+<h1>Carrinho:</h1>
 
-@for (item of carrinho(); track $index){
+@for (item of carrinhoService.itens(); track $index){
   <p>{{item.nome}} - R$ {{item.preco | currency: 'BRL'}}</p>
 }
 

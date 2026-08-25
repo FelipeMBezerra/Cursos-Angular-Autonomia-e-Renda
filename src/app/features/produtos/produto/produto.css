@@ -8,3 +8,7 @@ mat-card{
     justify-content: space-between;
     height: 100%;
 }
+
+button{
+    margin: 5px;
+}

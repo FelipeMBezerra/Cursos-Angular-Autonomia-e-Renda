@@ -1,8 +1,9 @@
 import { Component, signal, computed, effect, inject } from '@angular/core';
 import { Produto } from '../produto/produto';
 import { CurrencyPipe } from '@angular/common';
-import { ProdutosService } from '../produtos.service';
+import { ProdutosService } from '../../../core/service/produtos.service';
 import { MatButtonModule } from '@angular/material/button';
+import { CarrinhoService } from '../../../core/service/carrinho.service';
 
 
 @Component({
@@ -33,18 +34,9 @@ export class ListaProdutos {
 
   private produtosService = inject(ProdutosService);
 
-  carrinho = signal<{ nome: string; preco: number }[]>([])
-
-  quantidadeCarrinho = computed(() => this.carrinho().length);
-  totalCarrinho = computed(() =>
-    this.carrinho().reduce((total, item) => total + item.preco, 0)
-  );
-
+  carrinhoService = inject(CarrinhoService);
   adicionarAoCarrinho(produto: { nome: string; preco: number }) {
-    this.carrinho.update(listaAtual => [
-      ...listaAtual,
-      produto
-    ]);
+  this.carrinhoService.adicionar(produto);
   }
 
   erro = signal<string | null>(null);
