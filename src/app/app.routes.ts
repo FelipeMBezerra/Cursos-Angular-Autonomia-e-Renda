@@ -21,11 +21,16 @@ export const routes: Routes = [{
 },
 {
     path: 'checkout',
+    canActivate:[authGuard],
     loadComponent:() => import('./features/cheakout/cheakout/cheakout').then((m) => m.Cheakout),
 },
 {
-    path: '*',
+    path: 'login',
+    loadComponent: () => import('./features/login/login/login').then((m) => m.Login),
+},
+{
+    path: '**',
     
-    redirectTo: ''
-}
+    redirectTo: '',
+},
 ];
